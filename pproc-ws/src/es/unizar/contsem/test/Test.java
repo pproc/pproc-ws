@@ -25,10 +25,10 @@ public class Test {
 			+ "\"formalizedDate\" : \"23-12-2014:30-12-2014\"," + "\"procedureType\" : \"RegularOpen\"" + "}";
 
 	public static void main(String[] args) {
-		test_facetQuery();
+		// test_facetQuery();
 		// test_json_decode();
 		// test_json_encode();
-		// test_contractQuery();
+		test_contractQuery();
 	}
 
 	public static void test_facetQuery() {
@@ -41,11 +41,11 @@ public class Test {
 		// facetMap.put("contractingAuthority", "zaragoza ayuntamiento");
 		facetMap.put("supplier_text", "urbanco");
 		// facetMap.put("supplier_cif", "A-50105667");
-//		facetMap.put("tenderStartDate", "2014-11-04 2014-11-04");
-//		 facetMap.put("tenderNoticeDate", "2014-11-01 2014-11-15");
-//		 facetMap.put("tenderDeadline", "2014-09-01 2014-11-15");
-//		 facetMap.put("awardDate", "2014-10-01 2014-11-15");
-//		 facetMap.put("formalizedDate", "2014-10-02 2014-10-02");
+		// facetMap.put("tenderStartDate", "2014-11-04 2014-11-04");
+		// facetMap.put("tenderNoticeDate", "2014-11-01 2014-11-15");
+		// facetMap.put("tenderDeadline", "2014-09-01 2014-11-15");
+		// facetMap.put("awardDate", "2014-10-01 2014-11-15");
+		// facetMap.put("formalizedDate", "2014-10-02 2014-10-02");
 		// facetMap.put("procedureType", "RegularOpen");
 		PprocQuery query = fact.getFacetedQuery(facetMap);
 		System.out.println(query.getSPARQLstring());
@@ -74,10 +74,8 @@ public class Test {
 
 	private static void test_contractQuery() {
 		PprocQueryFactory fact = new PprocQueryFactory();
-		Map<String, String> facetMap = new HashMap<String, String>();
-		facetMap.put("contractUri", "http://www.zaragoza.es/api/recurso/sector-publico/contrato/0624838-14");
-		facetMap.put("sparqlEndpoint", "http://datos.zaragoza.es/sparql");
-		PprocQuery query = fact.getContractQuery(facetMap);
+		PprocQuery query = fact
+				.getContractQuery("http://www.zaragoza.es/api/recurso/sector-publico/contrato/0624838-14");
 		List<PprocConstructResult> resultList = new ArrayList<PprocConstructResult>();
 		resultList.add(query.doConstruct());
 		String result = PprocConstructResult.asJson(resultList);

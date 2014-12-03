@@ -1,12 +1,21 @@
 package es.unizar.contsem.methods;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.xml.stream.XMLStreamException;
 
+import org.json.JSONException;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -15,12 +24,28 @@ import es.unizar.contsem.query.PprocQueryFactory;
 import es.unizar.contsem.query.PprocQueryFactoryConfig;
 import es.unizar.contsem.query.construct.PprocConstructResult;
 import es.unizar.contsem.query.select.PprocSelectResult;
+import es.unizar.contsem.test.Log;
 
 public class Methods {
 
-	private static String[] sparqlEndpoints = { "http://datos.zaragoza.es/sparql"
-	// , "http://www.dphuesca.es/sparql"
-	};
+	private static Map<String, String> sparqlEndpoints;
+
+	static {
+
+		try {
+			sparqlEndpoints = getSparqlEndpoints("http://contsem.unizar.es/docs/sparqlEndpoints.json");
+		} catch (IOException e) {
+			Log.error(Methods.class, "error retrieving sparql endpoints from web");
+			sparqlEndpoints = new HashMap<String, String>();
+			sparqlEndpoints.put("http://datos.zaragoza.es/sparql", "Ayuntamiento de Zaragoza");
+			sparqlEndpoints.put("http://www.dphuesca.es/sparql", "Diputacion Provincial de Huesca");
+		}
+
+		for (String key : sparqlEndpoints.keySet()) {
+			Log.info(Methods.class, key + " - " + sparqlEndpoints.get(key));
+		}
+
+	}
 
 	/**
 	 * @param json_object
@@ -56,8 +81,8 @@ public class Methods {
 
 		// Actual query
 		List<PprocSelectResult> resultList = new ArrayList<PprocSelectResult>();
-		for(int i=0; i<sparqlEndpoints.length; i++) {
-			PprocQueryFactory fact = new PprocQueryFactory(new PprocQueryFactoryConfig(sparqlEndpoints[i]));
+		for (String sparqlEndpoint : sparqlEndpoints.keySet()) {
+			PprocQueryFactory fact = new PprocQueryFactory(new PprocQueryFactoryConfig(sparqlEndpoint));
 			PprocQuery query = fact.getFacetedQuery(facetMap);
 			resultList.add(query.doSelect());
 		}
@@ -66,21 +91,40 @@ public class Methods {
 
 	public static String contractQuery(String json_string) {
 
-		// Transforming JSON string to Map<String,String>
+		// Transforming JSON string to JSON object
 		Object obj = JSONValue.parse(json_string);
 		JSONObject json = (JSONObject) obj;
-		Map<String, String> facetMap = new HashMap<String, String>();
-		facetMap.put("contractUri", json.get("contractUri") == null ? null : json.get("contractUri").toString());
-		facetMap.put("sparqlEndpoint", json.get("sparqlEndpoint") == null ? null : json.get("sparqlEndpoint").toString());
-		
+
 		// Actual query
 		List<PprocConstructResult> resultList = new ArrayList<PprocConstructResult>();
-		for(int i=0; i<sparqlEndpoints.length; i++) {
-			PprocQueryFactory fact = new PprocQueryFactory(new PprocQueryFactoryConfig(sparqlEndpoints[i]));
-			PprocQuery query = fact.getContractQuery(facetMap);
-			resultList.add(query.doConstruct());
-		}
+		PprocQueryFactory fact = new PprocQueryFactory(new PprocQueryFactoryConfig(json.get("sparqlEndpoint")
+				.toString()));
+		PprocQuery query = fact.getContractQuery(json.get("contractUri").toString());
+		resultList.add(query.doConstruct());
 		return PprocConstructResult.asJson(resultList);
+	}
+
+	public static Map<String, String> getSparqlEndpoints(String urlToJson) throws IOException {
+		Map<String, String> map = new HashMap<String, String>();
+		InputStream is = new URL(urlToJson).openStream();
+		try {
+			BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+			StringBuilder sb = new StringBuilder();
+			int cp;
+			while ((cp = rd.read()) != -1) {
+				sb.append((char) cp);
+			}
+			String jsonText = sb.toString();
+			Object obj = JSONValue.parse(jsonText);
+			JSONArray jsonArray = (JSONArray) obj;
+			for (Iterator iter = jsonArray.listIterator(); iter.hasNext();) {
+				JSONObject json = (JSONObject) iter.next();
+				map.put(json.get("sparqlEndpoint").toString(), json.get("name").toString());
+			}
+		} finally {
+			is.close();
+		}
+		return map;
 	}
 
 }

@@ -244,8 +244,9 @@ public class PprocQueryFactory {
 		return new PprocQuery(query.toString(), config);
 	}
 
-	public PprocQuery getContractQuery(Map<String, String> facetMap) {
-		String constructQuery = "construct { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0840421-12> ?prop ?value } where { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0840421-12> ?prop ?value }";
+	public PprocQuery getContractQuery(String contractUri) {
+		String constructQuery = "construct { <" + contractUri + "> ?prop ?value } " + "where { <" + contractUri
+				+ "> ?prop ?value }";
 		return new PprocQuery(constructQuery, config);
 	}
 

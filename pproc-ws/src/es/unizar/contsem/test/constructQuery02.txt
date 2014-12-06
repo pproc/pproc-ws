@@ -1,0 +1,65 @@
+PREFIX pproc: <http://contsem.unizar.es/def/sector-publico/pproc#> 
+PREFIX dcterms: <http://purl.org/dc/terms/> 
+PREFIX gr: <http://purl.org/goodrelations/v1#> 
+PREFIX s: <http://schema.org/> 
+PREFIX org: <http://www.w3.org/ns/org#> 
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
+PREFIX pc: <http://purl.org/procurement/public-contracts#> 
+CONSTRUCT {  
+ <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> ?p1 ?o1 .
+ ?s2 ?p2 ?o2 . ?s3 ?p3 ?o3 . ?s4 ?p4 ?o4 . ?s5 ?p5 ?o5 . ?s6 ?p6 ?o6 . ?s7 ?p7 ?o7 . ?s8 ?p8 ?o8 . ?s9 ?p9 ?o9 .
+ ?s10 ?p10 ?o10 . ?s11 ?p11 ?o11 . ?s12 ?p12 ?o12 . ?s13 ?p13 ?o13 . ?s14 ?p14 ?o14 . ?s15 ?p15 ?o15 . ?s16 ?p16 ?o16 . ?s17 ?p17 ?o17 . ?s18 ?p18 ?o18 . ?s19 ?p19 ?o19 .
+ ?s20 ?p20 ?o20 . ?s21 ?p21 ?o21 . ?s22 ?p22 ?o22 . ?s23 ?p23 ?o23 . ?s24 ?p24 ?o24 . ?s25 ?p25 ?o25 . ?s26 ?p26 ?o26 . ?s27 ?p27 ?o27 . ?s28 ?p28 ?o28 . ?s29 ?p29 ?o29 .
+ ?s30 ?p30 ?o30 . ?s31 ?p31 ?o31 . ?s32 ?p32 ?o32 . ?s33 ?p33 ?o33 . ?s34 ?p34 ?o34 . ?s35 ?p35 ?o35 . ?s36 ?p36 ?o36 . ?s37 ?p37 ?o37 . ?s38 ?p38 ?o38 . ?s39 ?p39 ?o39 .
+ ?s40 ?p40 ?o40 . ?s41 ?p41 ?o41 . ?s42 ?p42 ?o42 . ?s43 ?p43 ?o43 . ?s44 ?p44 ?o44 . ?s45 ?p45 ?o45 . ?s46 ?p46 ?o46 . ?s47 ?p47 ?o47 . ?sz ?pz ?oz
+ 
+} WHERE {
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> ?p1 ?o1 } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:contractProcedureSpecifications ?s2 . ?s2 ?p2 ?o2  } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:contractProcedureSpecifications ?cpe3 . ?cpe3 pproc:tenderInformationProvider ?s3 . ?s3 ?p3 ?o3 } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:contractProcedureSpecifications ?cpe4 . ?cpe4 pproc:tenderInformationProvider ?aux4 . ?aux4 s:location ?s4 . ?s4 ?p4 ?o4 } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:contractProcedureSpecifications ?cpe5 . ?cpe5 pproc:tenderInformationProvider ?aux5 . ?aux5 s:location ?aux5b . ?aux5b s:address ?s5 . ?s5 ?p5 ?o5 } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:contractProcedureSpecifications ?cpe6 . ?cpe6 pproc:electronicAuction ?s6 . ?s6 ?p6 ?o6 } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:contractProcedureSpecifications ?cpe7 . ?cpe7 pproc:briefing ?s7 . ?s7 ?p7 ?o7 } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:contractProcedureSpecifications ?cpe8 . ?cpe8 pproc:briefing ?aux8 . ?aux8 s:location ?s8 . ?s8 ?p8 ?o8 } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:contractProcedureSpecifications ?cpe9 . ?cpe9 pproc:briefing ?aux9 . ?aux9 s:location ?aux9b . ?aux9b s:address ?s9 . ?s9 ?p9 ?o9 } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:contractProcedureSpecifications ?cpe10 . ?cpe10 pproc:contractAdditionalObligations ?s10 . ?s10 ?p10 ?o10 } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:contractProcedureSpecifications ?cpe11 . ?cpe11 pproc:contractActivities ?s11 . ?s11 ?p11 ?o11 } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:contractProcedureSpecifications ?cpe12 . ?cpe12 pproc:contractActivities ?aux12 . ?aux12 pproc:tenderMeeting ?s12 . ?s12 ?p12 ?o12 } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:contractProcedureSpecifications ?cpe13 . ?cpe13 pproc:contractActivities ?aux13 . ?aux13 pproc:contractingBodyAgreement ?s13 . ?s13 ?p13 ?o13 } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:contractProcedureSpecifications ?cpe14 . ?cpe14 pproc:contractActivities ?aux14 . ?aux14 pproc:notice ?s14 . ?s14 ?p14 ?o14 } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:contractProcedureSpecifications ?cpe15 . ?cpe15 pproc:contractBodies ?s15 . ?s15 ?p15 ?o15 } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:contractProcedureSpecifications ?cpe16 . ?cpe16 pproc:contractBodies ?aux16 . ?aux16 pproc:committee ?s16 . ?s16 ?p16 ?o16 } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:contractProcedureSpecifications ?cpe17 . ?cpe17 pproc:contractingBodyAgreement ?s17 . ?s17 ?p17 ?o17 } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:contractProcedureSpecifications ?cpe18 . ?cpe18 pproc:notice ?s18 . ?s18 ?p18 ?o18 } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:contractProcedureSpecifications ?cpe19 . ?cpe19 pproc:tenderSubmissionLocation ?s19 . ?s19 ?p19 ?o19 } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:contractProcedureSpecifications ?cpe20 . ?cpe20 pproc:tenderSubmissionLocation ?aux20 . ?aux20 s:address ?s20 . ?s20 ?p20 ?o20 } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:frameworkAgreement ?s21 . ?s21 ?p21 ?o21  } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pc:contractingAuthority ?s22 . ?s22 ?p22 ?o22  } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:contractingBody ?s23 . ?s23 ?p23 ?o23  } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:managingDepartment ?s24 . ?s24 ?p24 ?o24  } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:delegatingAuthority ?s25 . ?s25 ?p25 ?o25  } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pc:onBehalfOf ?s26 . ?s26 ?p26 ?o26  } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pc:awardCriteriaCombination ?s27 . ?s27 ?p27 ?o27  } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pc:awardCriteriaCombination ?aux28 . ?aux28 pc:awardCriterion ?s28 . ?s28 ?p28 ?o28 } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pc:tender ?s29 . ?s29 ?p29 ?o29  } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pc:tender ?aux30 . ?aux30 pc:supplier ?s30 . ?s30 ?p30 ?o30 } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pc:tender ?aux31 . ?aux31 pc:offeredPrice ?s31 . ?s31 ?p31 ?o31 } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pc:actualPrice ?s32 . ?s32 ?p32 ?o32  } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:contractModification ?s33 . ?s33 ?p33 ?o33  } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:contractResolution ?s34 . ?s34 ?p34 ?o34  } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:procedureWaive ?s35 . ?s35 ?p35 ?o35  } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:procedureResignation ?s36 . ?s36 ?p36 ?o36  } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:procedureVoid ?s37 . ?s37 ?p37 ?o37  } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:contractTemporalConditions ?sz . ?sz ?pz ?oz  } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:contractObject ?s38 . ?s38 ?p38 ?o38  } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:contractObject ?aux39 . ?aux39 pproc:contractTemporalConditions ?s39 . ?s39 ?p39 ?o39 } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:contractObject ?aux40 . ?aux40 pproc:contractEconomicConditions ?s40 . ?s40 ?p40 ?o40 } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:contractObject ?aux41 . ?aux41 pproc:contractEconomicConditions ?aux41b . ?aux41b pproc:budgetPrice ?s41 . ?s41 ?p41 ?o41 } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:contractObject ?aux42 . ?aux42 pproc:contractEconomicConditions ?aux42b . ?aux42b pproc:estimatedValue ?s42 . ?s42 ?p42 ?o42 } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:contractObject ?aux43 . ?aux43 pproc:contractEconomicConditions ?aux43b . ?aux43b pproc:feePrice ?s43 . ?s43 ?p43 ?o43 } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:contractObject ?aux44 . ?aux44 pproc:contractExecutionConditions ?s44 . ?s44 ?p44 ?o44 } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:contractObject ?aux45 . ?aux45 pproc:cotractModificationConditions ?s45 . ?s45 ?p45 ?o45 } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:tenderRequirements ?s46 . ?s46 ?p46 ?o46 } UNION
+  { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:tendererRequirements ?s47 . ?s47 ?p47 ?o47 }
+}

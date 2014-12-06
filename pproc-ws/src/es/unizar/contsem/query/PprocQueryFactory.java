@@ -1,6 +1,9 @@
 package es.unizar.contsem.query;
 
+import java.io.InputStream;
 import java.util.Map;
+
+import es.unizar.contsem.methods.Methods;
 
 public class PprocQueryFactory {
 
@@ -14,7 +17,6 @@ public class PprocQueryFactory {
 	private final String SELECT = "SELECT DISTINCT ";
 	private final String WHERE = "WHERE { \n";
 	private final String END = "} \n";
-
 	private final int SHORTEST_STRING = 3;
 
 	public PprocQueryFactory() {
@@ -32,7 +34,7 @@ public class PprocQueryFactory {
 		// ////////////////////////////
 		// SubQuery SELECT
 		StringBuilder querySelect = new StringBuilder();
-		querySelect.append(SELECT).append(" ?contract ?title ?budgetValue \n");
+		querySelect.append(SELECT).append("?contract ?title ?budgetValue \n");
 
 		// ////////////////////////////
 		// SubQuery WHERE
@@ -69,6 +71,7 @@ public class PprocQueryFactory {
 			queryWhere.append("?co pproc:contractEconomicConditions ?cec .\n");
 			queryWhere.append("?cec pproc:budgetPrice ?budgetPrice .\n");
 			queryWhere.append("?budgetPrice gr:hasCurrencyValue ?budgetValue .\n");
+			queryWhere.append("?budgetPrice gr:valueAddedTaxIncluded 1 . \n");
 			if (Float.parseFloat(altArray[0]) > 0)
 				queryWhere.append("FILTER (?budgetValue > " + altArray[0] + ") \n");
 			if (Float.parseFloat(altArray[1]) > 0)
@@ -230,11 +233,13 @@ public class PprocQueryFactory {
 			queryWhere.append("OPTIONAL { ?contract pproc:contractObject ?co .\n");
 			queryWhere.append("?co pproc:contractEconomicConditions ?cec .\n");
 			queryWhere.append("?cec pproc:budgetPrice ?budgetPrice .\n");
-			queryWhere.append("?budgetPrice gr:hasCurrencyValue ?budgetValue } \n");
+			queryWhere.append("?budgetPrice gr:hasCurrencyValue ?budgetValue .\n");
+			queryWhere.append("?budgetPrice gr:valueAddedTaxIncluded 1 } \n");
 		} else if (facetMap.get("budget") == null && facetMap.get("object_cpv") != null) {
 			queryWhere.append("OPTIONAL { ?co pproc:contractEconomicConditions ?cec .\n");
 			queryWhere.append("?cec pproc:budgetPrice ?budgetPrice .\n");
-			queryWhere.append("?budgetPrice gr:hasCurrencyValue ?budgetValue } \n");
+			queryWhere.append("?budgetPrice gr:hasCurrencyValue ?budgetValue .\n");
+			queryWhere.append("?budgetPrice gr:valueAddedTaxIncluded 1 } \n");
 		}
 
 		// ////////////////////////////
@@ -245,9 +250,15 @@ public class PprocQueryFactory {
 	}
 
 	public PprocQuery getContractQuery(String contractUri) {
-		String constructQuery = "construct { <" + contractUri + "> ?prop ?value } " + "where { <" + contractUri
-				+ "> ?prop ?value }";
-		return new PprocQuery(constructQuery, config);
+		InputStream inputStream = getClass().getResourceAsStream("/es/unizar/contsem/test/constructQuery03.txt");
+		String string = Methods.getStringFromInputStream(inputStream);
+		return new PprocQuery(string.replaceAll("contractUri", contractUri), config);
+	}
+	
+	public PprocQuery getContractQuery2(String contractUri) {
+		InputStream inputStream = getClass().getResourceAsStream("/es/unizar/contsem/test/constructQuery01.txt");
+		String string = Methods.getStringFromInputStream(inputStream);
+		return new PprocQuery(string.replaceAll("contractUri", contractUri), config);
 	}
 
 }

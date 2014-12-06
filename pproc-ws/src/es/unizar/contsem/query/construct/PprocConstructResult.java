@@ -23,6 +23,12 @@ public class PprocConstructResult {
 	public String getSparqlEndpoint() {
 		return sparqlEndpoint;
 	}
+	
+	public String asJsonLD() {
+		StringWriter out = new StringWriter();
+		model.write(out, "JSON-LD");
+		return out.toString();
+	}
 
 	public static String asJson(List<PprocConstructResult> resultList) {
 		Model model = ModelFactory.createDefaultModel();

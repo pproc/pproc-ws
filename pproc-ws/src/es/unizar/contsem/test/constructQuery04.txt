@@ -1,0 +1,38 @@
+PREFIX pproc: <http://contsem.unizar.es/def/sector-publico/pproc#> 
+PREFIX dcterms: <http://purl.org/dc/terms/> 
+PREFIX gr: <http://purl.org/goodrelations/v1#> 
+PREFIX s: <http://schema.org/> 
+PREFIX org: <http://www.w3.org/ns/org#> 
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
+PREFIX pc: <http://purl.org/procurement/public-contracts#> 
+describe
+
+<http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> ?cpe ?a1 ?a2 ?a3 ?a4 ?a5 ?a6 ?a7 ?a8 ?a9 ?a10 ?a11 ?a12 ?a13 ?a14 ?a15 ?a16
+?a17 ?a18 
+
+where { 
+OPTIONAL { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:contractProcedureSpecifications ?cpe 
+  OPTIONAL { ?cpe pproc:tenderInformationProvider ?a1}
+  OPTIONAL { ?cpe pproc:electronicAuction ?a2}
+  OPTIONAL { ?cpe pproc:briefing ?a3}
+  OPTIONAL { ?cpe pproc:contractAdditionalObligations ?a4}
+  OPTIONAL { ?cpe pproc:contractActivities ?a5
+    OPTIONAL { ?a5 pproc:tenderMeeting ?a6 }
+    OPTIONAL { ?a5 pproc:contractingBodyAgreement ?a7 }
+    OPTIONAL { ?a5 pproc:notice ?a8 }
+  }
+  OPTIONAL { ?cpe pproc:contractBodies ?a9
+    OPTIONAL { ?a9 pproc:committee ?a10 }
+  }
+  OPTIONAL { ?cpe pproc:contractingBodyAgreement ?a11}
+  OPTIONAL { ?cpe pproc:notice ?a12}
+}
+OPTIONAL { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06> pproc:frameworkAgreement ?a13}
+OPTIONAL { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06>  pc:awardCriteriaCombination ?a14
+  OPTIONAL { ?a14 pc:awardCriterion ?a15}
+}
+OPTIONAL { <http://www.zaragoza.es/api/recurso/sector-publico/contrato/0608354-06>  pc:tender ?a16
+  OPTIONAL { ?a16 pc:offeredPrice ?a17}
+  OPTIONAL { ?a16 pc:supplier ?a18}
+}
+}

@@ -1,0 +1,85 @@
+PREFIX pproc: <http://contsem.unizar.es/def/sector-publico/pproc#> 
+PREFIX dcterms: <http://purl.org/dc/terms/> 
+PREFIX gr: <http://purl.org/goodrelations/v1#> 
+PREFIX s: <http://schema.org/> 
+PREFIX org: <http://www.w3.org/ns/org#> 
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
+PREFIX pc: <http://purl.org/procurement/public-contracts#> 
+CONSTRUCT {  
+ <contractUri> ?p1 ?o1 .
+ ?s2 ?p2 ?o2 . ?s3 ?p3 ?o3 . ?s3_1 ?p3_1 ?o3_1 . ?s3_2 ?p3_2 ?o3_2 . 
+ ?s4 ?p4 ?o4 . ?s5 ?p5 ?o5 . ?s5_1 ?p5_1 ?o5_1 . ?s5_2 ?p5_2 ?o5_2 .
+ ?s6 ?p6 ?o6 . ?s7 ?p7 ?o7 . ?s7_1 ?p7_1 ?o7_1 . ?s7_2 ?p7_2 ?o7_2 . ?s7_3 ?p7_3 ?o7_3 .
+ ?s8 ?p8 ?o8 . ?s8_1 ?p8_1 ?o8_1 . 
+ ?s9 ?p9 ?o9 . ?s10 ?p10 ?o10 . ?s11 ?p11 ?o11 . ?s11_1 ?p11_1 ?o11_1 .
+ ?s12 ?p12 ?o12 . ?s13 ?p13 ?o13 . ?s14 ?p14 ?o14 . ?s15 ?p15 ?o15 . ?s16 ?p16 ?o16 . ?s17 ?p17 ?o17 .
+ ?s18 ?p18 ?o18 . ?s18_1 ?p18_1 ?o18_1 .
+ ?s19 ?p19 ?o19 . ?s19_1 ?p19_1 ?o19_1 . ?s19_2 ?p19_2 ?o19_2 .
+ ?s20 ?p20 ?o20 . ?s21 ?p21 ?o21 . ?s22 ?p22 ?o22 . ?s23 ?p23 ?o23 . ?s24 ?p24 ?o24 . ?s25 ?p25 ?o25 . ?sz ?pz ?oz .
+ ?s26 ?p26 ?o26 . ?s26_1 ?p26_1 ?o26_1 . ?s26_2 ?p26_2 ?o26_2 . ?s26_2_1 ?p26_2_1 ?o26_2_1 . ?s26_2_2 ?p26_2_2 ?o26_2_2 . ?s26_2_3 ?p26_2_3 ?o26_2_3 . 
+ ?s26_3 ?p26_3 ?o26_3 . ?s26_4 ?p26_4 ?o26_4 .
+ ?s27 ?p27 ?o27 . ?s28 ?p28 ?o28
+} WHERE {
+  { <contractUri> ?p1 ?o1 }
+  UNION { <contractUri> pproc:contractProcedureSpecifications ?s2 . ?s2 ?p2 ?o2 
+    OPTIONAL { ?s2 pproc:tenderInformationProvider ?s3 . ?s3 ?p3 ?o3 
+      OPTIONAL { ?s3 s:location ?s3_1 . ?s3_1 ?p3_1 ?o3_1 
+        OPTIONAL { ?s3_1 s:address ?s3_2 . ?s3_2 ?p3_2 ?o3_2 }
+      }
+    }
+    OPTIONAL { ?s2 pproc:electronicAuction ?s4 . ?s4 ?p4 ?o4 }
+    OPTIONAL { ?s2 pproc:briefing ?s5 . ?s5 ?p5 ?o5 
+      OPTIONAL { ?s5 s:location ?s5_1 . ?s5_1 ?p5_1 ?o5_1 
+        OPTIONAL { ?s5_1 s:address ?s5_2 . ?s5_2 ?p5_2 ?o5_2 }
+      }
+    }
+    OPTIONAL { ?s2 pproc:contractAdditionalObligations ?s6 . ?s6 ?p6 ?o6 }
+    OPTIONAL { ?s2 pproc:contractActivities ?s7 . ?s7 ?p7 ?o7 
+      OPTIONAL { { ?s7 pproc:tenderMeeting ?s7_1 } UNION { ?s7 pproc:tenderAdmissionMeeting ?s7_1 } ?s7_1 ?p7_1 ?o7_1 }
+      OPTIONAL { ?s7 pproc:contractingBodyAgreement ?s7_2 . ?s7_2 ?p7_2 ?o7_2 }
+      OPTIONAL { ?s7 pproc:notice ?s7_3 . ?s7_3 ?p7_3 ?o7_3 }
+    }
+    OPTIONAL { ?s2 pproc:contractBodies ?s8 . ?s8 ?p8 ?o8 
+      OPTIONAL { ?s8 pproc:committee ?s8_1 . ?s8_1 ?p8_1 ?o8_1 }
+    }
+    OPTIONAL { ?s2 pproc:contractingBodyAgreement ?s9 . ?s9 ?p9 ?o9 }
+    OPTIONAL { ?s2 pproc:notice ?s10 . ?s10 ?p10 ?o10 }
+    OPTIONAL { ?s2 pproc:tenderSubmissionLocation ?s11 . ?s11 ?p11 ?o11
+      OPTIONAL { ?s11 s:address ?s11_1 . ?s11_1 ?p11_1 ?o11_1 }
+    }
+  }
+  UNION { <contractUri> pproc:frameworkAgreement ?s12 . ?s12 ?p12 ?o12 }
+  UNION { <contractUri> pc:contractingAuthority ?s13 . ?s13 ?p13 ?o13 }
+  UNION { <contractUri> pproc:contractingBody ?s14 . ?s14 ?p14 ?o14 }
+  UNION { <contractUri> pproc:managingDepartment ?s15 . ?s15 ?p15 ?o15 }
+  UNION { <contractUri> pproc:delegatingAuthority ?s16 . ?s16 ?p16 ?o16 }
+  UNION { <contractUri> pc:onBehalfOf ?s17 . ?s17 ?p17 ?o17 }
+  UNION { <contractUri> pc:awardCriteriaCombination ?s18 . ?s18 ?p18 ?o18 
+    OPTIONAL { ?s18 pc:awardCriterion ?s18_1 . ?s18_1 ?p18_1 ?o18_1 }
+  }
+  UNION { <contractUri> pc:tender ?s19 . ?s19 ?p19 ?o19 
+    OPTIONAL { ?s19 pc:supplier ?s19_1 . ?s19_1 ?p19_1 ?o19_1 }
+    OPTIONAL { ?s19 pc:offeredPrice ?s19_2 . ?s19_2 ?p19_2 ?o19_2 }
+  }
+  UNION { <contractUri> pc:actualPrice ?s20 . ?s20 ?p20 ?o20 }
+  UNION { <contractUri> pproc:contractModification ?s21 . ?s21 ?p21 ?o21 }
+  UNION { <contractUri> pproc:contractResolution ?s22 . ?s22 ?p22 ?o22 }
+  UNION { <contractUri> pproc:procedureWaive ?s23 . ?s23 ?p23 ?o23 }
+  UNION { <contractUri> pproc:procedureResignation ?s24 . ?s24 ?p24 ?o24 }
+  UNION { <contractUri> pproc:procedureVoid ?s25 . ?s25 ?p25 ?o25 }
+  UNION { <contractUri> pproc:contractTemporalConditions ?sz . ?sz ?pz ?oz }
+  UNION { <contractUri> pproc:contractObject ?s26 . ?s26 ?p26 ?o26
+    OPTIONAL { ?s26 pproc:contractTemporalConditions ?s26_1 . ?s26_1 ?p26_1 ?o26_1 }
+    OPTIONAL { ?s26 pproc:contractEconomicConditions ?s26_2 . ?s26_2 ?p26_2 ?o26_2
+      OPTIONAL { ?s26_2 pproc:budgetPrice ?s26_2_1 . ?s26_2_1 ?p26_2_1 ?o26_2_1 }
+      OPTIONAL { ?s26_2 pproc:estimatedValue ?s26_2_2 . ?s26_2_2 ?p26_2_2 ?o26_2_2 }
+      OPTIONAL { ?s26_2 pproc:feePrice ?s26_2_3 . ?s26_2_3 ?p26_2_3 ?o26_2_3 }
+    }
+    OPTIONAL { ?s26 pproc:contractExecutionConditions ?s26_3 . ?s26_3 ?p26_3 ?o26_3 }
+    OPTIONAL { ?s26 pproc:cotractModificationConditions ?s26_4 . ?s26_4 ?p26_4 ?o26_4 }
+  }
+  UNION { <contractUri> pproc:tenderRequirements ?s27 . ?s27 ?p27 ?o27 }
+  UNION { <contractUri> pproc:tendererRequirements ?s28 . ?s28 ?p28 ?o28 }
+}
+
+

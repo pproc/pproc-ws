@@ -87,22 +87,32 @@ public class PprocSelectResult {
 			for (int i = 0; i < result.size(); i++) {
 				JSONObject object = new JSONObject();
 				for (int j = 0; j < result.getColumnCount(); j++) {
+					boolean isDouble = false;
 					String key = null;
 					switch (result.getColumnName(j)) {
 					case "contract":
-						key = "contractURI";
+						key = "contractUri";
 						break;
 					case "title":
 						key = "contractName";
 						break;
 					case "budgetValue":
+						isDouble = true;
 						key = "budget";
 						break;
 					}
+					String toPut;
+					// getting rid of types
 					if (result.getRow(i).get(j).indexOf("^^http") > -1)
-						object.put(key, result.getRow(i).get(j).substring(0, result.getRow(i).get(j).indexOf("^^http")));
+						toPut = result.getRow(i).get(j).substring(0, result.getRow(i).get(j).indexOf("^^http")).trim();
 					else
-						object.put(key, result.getRow(i).get(j));
+						toPut = result.getRow(i).get(j).trim();
+					// case is a number
+					if (isDouble) {
+						if (!toPut.equals("null"))
+							object.put(key, Double.parseDouble(toPut));
+					} else
+						object.put(key, toPut);
 				}
 				object.put("sparqlEndpoint", result.sparqlEndpoint);
 				array.add(object);

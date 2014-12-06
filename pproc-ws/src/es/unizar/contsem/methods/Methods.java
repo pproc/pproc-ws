@@ -6,6 +6,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -19,12 +21,12 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
+import es.unizar.contsem.Log;
 import es.unizar.contsem.query.PprocQuery;
 import es.unizar.contsem.query.PprocQueryFactory;
 import es.unizar.contsem.query.PprocQueryFactoryConfig;
 import es.unizar.contsem.query.construct.PprocConstructResult;
 import es.unizar.contsem.query.select.PprocSelectResult;
-import es.unizar.contsem.test.Log;
 
 public class Methods {
 
@@ -96,12 +98,10 @@ public class Methods {
 		JSONObject json = (JSONObject) obj;
 
 		// Actual query
-		List<PprocConstructResult> resultList = new ArrayList<PprocConstructResult>();
 		PprocQueryFactory fact = new PprocQueryFactory(new PprocQueryFactoryConfig(json.get("sparqlEndpoint")
 				.toString()));
 		PprocQuery query = fact.getContractQuery(json.get("contractUri").toString());
-		resultList.add(query.doConstruct());
-		return PprocConstructResult.asJson(resultList);
+		return query.doConstruct().asJsonLD();
 	}
 
 	public static Map<String, String> getSparqlEndpoints(String urlToJson) throws IOException {
@@ -125,6 +125,34 @@ public class Methods {
 			is.close();
 		}
 		return map;
+	}
+
+	public static String readFile(String path, Charset encoding) throws IOException {
+		byte[] encoded = Files.readAllBytes(Paths.get(path));
+		return new String(encoded, encoding);
+	}
+
+	public static String getStringFromInputStream(InputStream is) {
+		BufferedReader br = null;
+		StringBuilder sb = new StringBuilder();
+		String line;
+		try {
+			br = new BufferedReader(new InputStreamReader(is));
+			while ((line = br.readLine()) != null) {
+				sb.append(line);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return sb.toString();
 	}
 
 }

@@ -1,0 +1,22 @@
+PREFIX pproc: <http://contsem.unizar.es/def/sector-publico/pproc#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX gr: <http://purl.org/goodrelations/v1#>
+PREFIX s: <http://schema.org/>
+PREFIX org: <http://www.w3.org/ns/org#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX pc: <http://purl.org/procurement/public-contracts#>
+CONSTRUCT {  
+  <contractUri> ?p1 ?o1 .
+  ?o1 ?p2 ?o2 . ?o2 ?p3 ?o3 . ?o3 ?p4 ?o4 . ?o4 ?p5 ?o5 .
+} WHERE {
+  <contractUri> ?p1 ?o1 . 
+  OPTIONAL { ?o1 ?p2 ?o2 . 
+    OPTIONAL { ?o2 ?p3 ?o3 . 
+      OPTIONAL {?o3 ?p4 ?o4. 
+        OPTIONAL { ?o4 ?p5 ?o5  .
+          OPTIONAL { ?o5 ?p6 ?o7 } 
+        }
+      }
+    }
+  }
+} 

@@ -250,7 +250,7 @@ public class PprocQueryFactory {
 	}
 
 	public PprocQuery getContractQuery(String contractUri) {
-		InputStream inputStream = getClass().getResourceAsStream("/es/unizar/contsem/test/constructQuery03.txt");
+		InputStream inputStream = getClass().getResourceAsStream("/es/unizar/contsem/query/construct/constructQuery.txt");
 		String string = Methods.getStringFromInputStream(inputStream);
 		return new PprocQuery(string.replaceAll("contractUri", contractUri), config);
 	}

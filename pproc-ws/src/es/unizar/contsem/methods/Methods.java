@@ -48,14 +48,7 @@ public class Methods {
 		}
 
 	}
-
-	/**
-	 * @param json_object
-	 *            a json object with the faceted query
-	 * @return a json object with the queried results
-	 * @throws JSONException
-	 * @throws XMLStreamException
-	 */
+	
 	public static String facetQuery(String json_string) {
 
 		// Transforming JSON string to Map<String,String>

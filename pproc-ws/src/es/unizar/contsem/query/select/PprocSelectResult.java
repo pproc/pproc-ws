@@ -109,7 +109,7 @@ public class PprocSelectResult {
 						toPut = result.getRow(i).get(j).trim();
 					// case is a number
 					if (isDouble) {
-						if (!toPut.equals("null"))
+						if (!toPut.equals("null") && !toPut.equals("NAN"))
 							object.put(key, Double.parseDouble(toPut));
 					} else
 						object.put(key, toPut);

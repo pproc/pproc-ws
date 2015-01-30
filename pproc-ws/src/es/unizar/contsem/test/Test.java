@@ -36,10 +36,16 @@ public class Test {
 			+ "\"formalizedDate\" : \"23-12-2014:30-12-2014\"," + "\"procedureType\" : \"RegularOpen\"" + "}";
 
 	public static void main(String[] args) {
-		// test_facetQuery();
+		 test_facetQuery();
 		// test_json_decode();
 		// test_json_encode();
-		test_contractQuery();
+//		test_contractQuery();
+//		test_customQuery();
+	}
+	
+	public static void test_customQuery() {
+		PprocQueryFactory fact = new PprocQueryFactory();
+//		fact
 	}
 
 	public static void test_facetQuery() {

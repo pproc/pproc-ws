@@ -6,7 +6,7 @@ Web service to retrieve structured data published in SPARQL endpoint of public c
 The web service, deployed at /pproc-ws, have two calls: **facetQuery** and **contractQuery**.
 
 ## facetQuery call
-Entry point to facet-query the public contracts data. 
+Entry point to facet-query the public contracts data.
 ### facetQuery input
 This call responds to JSON format inputs with the following structure:
 ```
@@ -56,6 +56,7 @@ The next rules applies:
   - *RegularOpen*
   - *Restricted*
   - *SimpleOpen*
+
 ### facetQuery output
 The call answers with a JSON list with the following structure:
 ```

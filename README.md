@@ -5,9 +5,9 @@ Web service to retrieve structured data published in SPARQL endpoint of public c
 
 The web service, deployed at /pproc-ws, have two calls: **facetQuery** and **contractQuery**.
 
-# facetQuery call
+## facetQuery call
 Entry point to facet-query the public contracts data. 
-## facetQuery input
+### facetQuery input
 This call responds to JSON format inputs with the following structure:
 ```
 {
@@ -56,7 +56,7 @@ The next rules applies:
   - *RegularOpen*
   - *Restricted*
   - *SimpleOpen*
-## facetQuery output
+### facetQuery output
 The call answers with a JSON list with the following structure:
 ```
 [
@@ -75,9 +75,9 @@ The call answers with a JSON list with the following structure:
   ...
 ]
 ```
-# contractQuery call
+## contractQuery call
 Method that provides all the information about one contract in JSON-LD format.
-## contractQuery input
+### contractQuery input
 This call responds to JSON format inputs with the following structure:
 ```
 {
@@ -86,10 +86,10 @@ This call responds to JSON format inputs with the following structure:
 }
 ```
 Note that one could use an element from the JSON list returned from **facetQuery**, as **contractName** and **budget** will be ignored in this call.
-## contractQuery output
+### contractQuery output
 The call answers with a JSON-LD with all the information found about the given contract. The triples in the JSON-LD are not organized or sorted in any way, we recommend to use the [JSON-LD javascript library](http://json-ld.org/) to structure it the way you need.
 You could expect to have [something like this](https://www.dropbox.com/s/9qc0rffv85mnbo8/contrato_0874341-13.jsonld?dl=0) as a JSON- LD response.
 
-# TODO
+## TODO
 - Include lucene-like cache
 - Include *end_phase* as a valid value to **tenderState** facet
